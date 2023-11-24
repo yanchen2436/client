@@ -1,6 +1,6 @@
 #! /bin/bash
 
-sudo mount -t cifs //192.168.10.200/share ~/share/image/img -o username=admin,password=admin
+sudo mount -t nfs 192.168.10.200:/home/admin/share/image/img /mnt/img
 cd /home/nano/client
 python3 close.py
 python3 client_log.py

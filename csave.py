@@ -48,7 +48,7 @@ def capture_images(camera_index, output_folder):
 
 # Set the camera index and output folder
 camera_index = 1  # 0 represents the default camera, can be changed based on the actual situation
-output_folder = os.path.expanduser("~/share/image/img")  # Output folder path
+output_folder = os.path.expanduser("mnt/img/image/img1")  # Output folder path
 
 # Call the capture_images function
 capture_images(camera_index, output_folder)
