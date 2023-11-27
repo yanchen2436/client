@@ -1,8 +1,14 @@
 import cv2
 import time
 import os
+import shutil
 
-def capture_images(camera_index, output_folder):
+def clear_and_capture_images(camera_index, output_folder):
+    # Clear the existing content of the output folder
+    if os.path.exists(output_folder):
+        shutil.rmtree(output_folder)
+    os.makedirs(output_folder)
+
     # Open the camera
     cap = cv2.VideoCapture(camera_index)
 
@@ -36,19 +42,25 @@ def capture_images(camera_index, output_folder):
         image_path = os.path.join(output_folder, f"image_{frame_count + 1}.jpg")
         cv2.imwrite(image_path, frame_cropped)
 
+        # Set the file permissions to 777
+        os.chmod(image_path, 0o777)
+
         # Update the frame rate counter
         frame_count += 1
 
     # Calculate and display the frame rate
     elapsed_time = time.time() - start_time
-    #fps = frame_count / elapsed_time
+    # fps = frame_count / elapsed_time
 
     # Release the camera
     cap.release()
 
+    # Print the total number of frames captured
+    print(f"Total frames captured: {frame_count}")
+
 # Set the camera index and output folder
 camera_index = 1  # 0 represents the default camera, can be changed based on the actual situation
-output_folder = os.path.expanduser("mnt/img/image/img1")  # Output folder path
+output_folder = os.path.expanduser("~/Desktop/out")  # Output folder path
 
-# Call the capture_images function
-capture_images(camera_index, output_folder)
+# Call the clear_and_capture_images function
+clear_and_capture_images(camera_index, output_folder)
