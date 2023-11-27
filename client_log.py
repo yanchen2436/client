@@ -69,8 +69,8 @@ def parse_and_execute(json_data, script_path):
             logger.debug("断电保存")
 
         if msg == "0x00":
-            # logger.debug("开启激光")
-            # subprocess.run(["python3", "/home/nano/client/open.py"])
+            logger.debug("开启激光")
+            subprocess.run(["python3", "/home/nano/client/open.py"])
             logger.debug("开始拍照")
             proc = subprocess.Popen(["python3", "/home/nano/client/csave.py"])
 
@@ -79,8 +79,8 @@ def parse_and_execute(json_data, script_path):
                 proc.terminate()
                 logger.debug("停止拍照")
                 proc = None
-            # subprocess.run(["python3", "/home/nano/client/close.py"])
-            # logger.debug("关闭激光")
+            subprocess.run(["python3", "/home/nano/client/close.py"])
+            logger.debug("关闭激光")
 
         elif msg == "0x03":
             logger.debug("开启激光")
@@ -88,7 +88,11 @@ def parse_and_execute(json_data, script_path):
 
         elif msg == "0x04":
             logger.debug("关闭激光")
-            subprocess.run(["python3", "/home/nano/close.py"])
+            subprocess.run(["python3", "/home/nano/client/close.py"])
+
+        elif msg == "0x05":
+            logger.debug("前端拍照")
+            subprocess.run(["python3", "/home/nano/client/cube_save.py"])
 
         # logger.info("解析和执行完成")
 
