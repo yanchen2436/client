@@ -60,7 +60,7 @@ def clear_and_capture_images(camera_index, output_folder):
 
 # Set the camera index and output folder
 camera_index = 1  # 0 represents the default camera, can be changed based on the actual situation
-output_folder = os.path.expanduser("~/Desktop/out")  # Output folder path
+output_folder = os.path.expanduser("/mnt/img/image/img2")  # Output folder path
 
 # Call the clear_and_capture_images function
 clear_and_capture_images(camera_index, output_folder)
