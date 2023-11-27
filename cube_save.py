@@ -52,7 +52,7 @@ def capture_and_run_scripts(camera_indices, output_folder, open_script_path, clo
     print("Initial images captured successfully.")
 
     # Run the open.py script
-    subprocess.run(["/home/nano/client/open.py"])
+    subprocess.run(["python3","/home/nano/client/open.py"])
 
     # Wait for a moment (you can adjust the sleep duration as needed)
     time.sleep(0.1)
@@ -73,7 +73,7 @@ def capture_and_run_scripts(camera_indices, output_folder, open_script_path, clo
         os.chmod(after_open_image_path, 0o777)
 
     # Run the close.py script
-    subprocess.run(["/home/nano/client/close.py"])
+    subprocess.run(["python3","/home/nano/client/close.py"])
 
     # Display a message
     print("Scripts executed successfully.")
