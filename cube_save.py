@@ -27,8 +27,10 @@ def capture_and_run_scripts(camera_indices, output_folder, open_script_path, clo
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
-    # Capture a single frame from each camera
-    frames = [cap.read()[1] for cap in caps]
+    # Capture a single frame from each camera with a delay of 100ms
+    frames = [None] * len(caps)
+    for i, cap in enumerate(caps):
+        frames[i] = cap.read()[1]
 
     # Check if the images are read correctly
     for i, frame in enumerate(frames):
@@ -36,18 +38,18 @@ def capture_and_run_scripts(camera_indices, output_folder, open_script_path, clo
             print(f"Failed to capture image from camera with index {camera_indices[i]}")
             return
 
-    # Save the images to the output folder
+    # Save the images to the output folder with customized filenames
     for i, frame in enumerate(frames):
-        image_path = os.path.join(output_folder, f"captured_image_camera{camera_indices[i]}.jpg")
-        cv2.imwrite(image_path, frame)
-        os.chmod(image_path, 0o777)
+        initial_image_path = os.path.join(output_folder, f"cam_c_{camera_indices[i]}.jpg")
+        cv2.imwrite(initial_image_path, frame)
+        os.chmod(initial_image_path, 0o777)
 
     # Release the cameras
     for cap in caps:
         cap.release()
 
     # Display a message
-    print("Images captured successfully.")
+    print("Initial images captured successfully.")
 
     # Run the open.py script
     subprocess.run(["/home/nano/client/open.py"])
@@ -64,11 +66,11 @@ def capture_and_run_scripts(camera_indices, output_folder, open_script_path, clo
             print(f"Failed to capture image from camera with index {camera_indices[i]} after running open.py")
             return
 
-    # Save the images after open.py to the output folder
+    # Save the images after open.py to the output folder with customized filenames
     for i, frame_after_open in enumerate(frames_after_open):
-        image_path = os.path.join(output_folder, f"captured_image_after_open_camera{camera_indices[i]}.jpg")
-        cv2.imwrite(image_path, frame_after_open)
-        os.chmod(image_path, 0o777)
+        after_open_image_path = os.path.join(output_folder, f"cam_o_{camera_indices[i]}.jpg")
+        cv2.imwrite(after_open_image_path, frame_after_open)
+        os.chmod(after_open_image_path, 0o777)
 
     # Run the close.py script
     subprocess.run(["/home/nano/client/close.py"])
