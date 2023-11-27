@@ -3,11 +3,15 @@ import time
 import os
 import shutil
 
+
 def clear_and_capture_images(camera_index, output_folder):
     # Clear the existing content of the output folder
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
     os.makedirs(output_folder)
+
+    # Set the permissions of the output folder to 777
+    os.chmod(output_folder, 0o777)
 
     # Open the camera
     cap = cv2.VideoCapture(camera_index)
@@ -48,6 +52,10 @@ def clear_and_capture_images(camera_index, output_folder):
         # Update the frame rate counter
         frame_count += 1
 
+        # Break the loop if 15 seconds have passed
+        if time.time() - start_time >= 15:
+            break
+
     # Calculate and display the frame rate
     elapsed_time = time.time() - start_time
     # fps = frame_count / elapsed_time
@@ -57,6 +65,7 @@ def clear_and_capture_images(camera_index, output_folder):
 
     # Print the total number of frames captured
     print(f"Total frames captured: {frame_count}")
+
 
 # Set the camera index and output folder
 camera_index = 1  # 0 represents the default camera, can be changed based on the actual situation
