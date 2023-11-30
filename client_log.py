@@ -69,18 +69,18 @@ def parse_and_execute(json_data, script_path):
             logger.debug("断电保存")
 
         if msg == "0x00":
-            logger.debug("开启激光")
-            subprocess.run(["python3", "/home/nano/client/open.py"])
-            logger.debug("开始拍照")
-            proc = subprocess.Popen(["python3", "/home/nano/client/csave.py"])
+            logger.debug("0x00")
+            # subprocess.run(["python3", "/home/nano/client/open.py"])
+            # logger.debug("开始拍照")
+            # proc = subprocess.Popen(["python3", "/home/nano/client/csave.py"])
 
         elif msg == "0xff":
-            if proc is not None:
-                proc.terminate()
-                logger.debug("停止拍照")
-                proc = None
-            subprocess.run(["python3", "/home/nano/client/close.py"])
-            logger.debug("关闭激光")
+            # if proc is not None:
+            #     proc.terminate()
+            #     logger.debug("停止拍照")
+            #     proc = None
+            # subprocess.run(["python3", "/home/nano/client/close.py"])
+            logger.debug("0xff")
 
         elif msg == "0x03":
             logger.debug("开启激光")
