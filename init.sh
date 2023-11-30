@@ -21,7 +21,7 @@ while [ $current_attempt -le $max_attempts ]; do
 
     cd /home/nano/client
     python3 close.py
-    python3 client_log.py
+    python3 client_cube.py
 
     break  # 跳出循环，因为成功了
 
