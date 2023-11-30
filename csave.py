@@ -57,7 +57,7 @@ def clear_and_capture_images(camera_index, output_folder):
             break
 
     # Calculate and display the frame rate
-    elapsed_time = time.time() - start_time
+    # elapsed_time = time.time() - start_time
     # fps = frame_count / elapsed_time
 
     # Release the camera

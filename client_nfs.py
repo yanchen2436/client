@@ -92,7 +92,7 @@ def parse_and_execute(json_data, script_path):
 
         elif msg == "0x05":
             logger.debug("前端拍照")
-            subprocess.run(["python3", "/home/nano/client/cube_save.py"])
+            # subprocess.run(["python3", "/home/nano/client/cube_save.py"])
 
         # logger.info("解析和执行完成")
 
